@@ -18,8 +18,8 @@ public class Checking extends Account{
 	public void showInfo() {
 
 		super.showInfo();
-		System.out.println(" Deposit Box ID :" + debitCardID);
-		System.out.println(" Deposit Box Key :" + debitCardKey);
+		System.out.println(" Debit Card ID :" + debitCardID);
+		System.out.println(" Debit Card Key :" + debitCardKey);
 	}
 	private void setDepositDebitCard() {
 		
@@ -28,7 +28,8 @@ public class Checking extends Account{
 	}
 	@Override
 	public void setRate() {
-		System.out.println("Rate ");
+		rate = getBaseRate() * .15;	
 		
 	}
+
 }

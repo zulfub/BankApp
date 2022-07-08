@@ -9,7 +9,7 @@ public abstract class Account implements InterestBaseRate {
 	
 	protected String acctType = null;
 	static int index= 10000;
-	private double rate;
+	protected double rate;
 	protected String acctNumber;
 	
 	//Constructor - Base properties and initialize account
@@ -23,6 +23,9 @@ public abstract class Account implements InterestBaseRate {
 		index++;
 		this.acctNumber = setAccountID();
 		this.rate = getBaseRate();
+		
+		setRate();
+		
 		
 	}
 	public abstract void setRate();
@@ -40,6 +43,7 @@ public abstract class Account implements InterestBaseRate {
 	public void showInfo() {
 		System.out.println("Name : " + name + "\n Account ID : " + acctNumber 
 				+"\n Account Type : " + acctType + "\n Balance : " + balanceAmt);
-		
+
+		System.out.println(" " + acctType + " Interest Rate : " + rate);
 	}
 }

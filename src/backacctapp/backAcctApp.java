@@ -3,8 +3,8 @@ package backacctapp;
 public class backAcctApp {
 	public static void main(String[] args) {
 		
-		Checking acct1 = new Checking("Skuld","00000000099",0001);
-		Savings acct2 = new Savings("XIII","00000000001",0001);
+		Checking acct1 = new Checking("Skuld","00000000099",110001);
+		Savings acct2 = new Savings("XIII","00000000001",220001);
 		
 		acct2.showInfo();
 		System.out.println("****************");
