@@ -6,9 +6,9 @@ public abstract class Account implements InterestBaseRate {
 	private String name;
 	private String TCKN;
 	private double balanceAmt;
+	private static int index= 10000;
 	
-	protected String acctType = null;
-	static int index= 10000;
+	protected String acctType;
 	protected double rate;
 	protected String acctNumber;
 	
@@ -30,10 +30,12 @@ public abstract class Account implements InterestBaseRate {
 	}
 	public abstract void setRate();
 	
-	private String setAccountID () {
-			String lastTwoOfTCKN = TCKN.substring(TCKN.length()-2 , TCKN.length());
-			int uniqueID = index;
-			int rand =(int) (Math.random()*Math.pow(10,3));
+	//Account ID creation method set as final because ID must not be changed during other processes 
+	final String setAccountID () {
+		
+		String lastTwoOfTCKN = TCKN.substring(TCKN.length()-2 , TCKN.length());
+		int uniqueID = index;
+		int rand =(int) (Math.random()*Math.pow(10,3));
 					
 		return lastTwoOfTCKN + uniqueID + rand;
 	}
@@ -52,17 +54,21 @@ public abstract class Account implements InterestBaseRate {
 		showBalanceAmt();
 	}
 	
-	protected String getAcctNumber() {
-		return acctNumber;
-	}
-	protected void setAcctNumber(String acctNumber) {
-		this.acctNumber = acctNumber;
-	}
 	public void transfer(Account fromAcct , Account toAcct , double amount) {
 		//Sending amount from fromAcct objects balance to toAcct objects balance 
 		System.out.println(amount +" transfered from " + fromAcct.getAcctNumber() + " to " + toAcct.getAcctNumber());
 		fromAcct.withdraw(amount);
 		toAcct.deposit(amount);
+	}
+	
+	protected String getAcctNumber() {
+		return acctNumber;
+	}
+	
+	public void compound() {
+		double acctInterest = balanceAmt * (rate / 365);
+		balanceAmt = balanceAmt + acctInterest;
+		System.out.println("Accepted Interest : $" + acctInterest);
 	}
 	
 	public void showBalanceAmt() {
