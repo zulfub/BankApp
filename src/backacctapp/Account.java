@@ -40,10 +40,41 @@ public abstract class Account implements InterestBaseRate {
 
 	//Comment Methods for checking account and saving account
 	
+	public void deposit (double amount) {
+		balanceAmt = balanceAmt + amount;
+		System.out.println("Deposit amountt : " + amount + " to " + acctNumber);
+		showBalanceAmt();
+	}
+	
+	public void withdraw(double amount) {
+		balanceAmt = balanceAmt - amount;
+		System.out.println("Withdraw amountt : " + amount + " from " + acctNumber);
+		showBalanceAmt();
+	}
+	
+	protected String getAcctNumber() {
+		return acctNumber;
+	}
+	protected void setAcctNumber(String acctNumber) {
+		this.acctNumber = acctNumber;
+	}
+	public void transfer(Account fromAcct , Account toAcct , double amount) {
+		//Sending amount from fromAcct objects balance to toAcct objects balance 
+		System.out.println(amount +" transfered from " + fromAcct.getAcctNumber() + " to " + toAcct.getAcctNumber());
+		fromAcct.withdraw(amount);
+		toAcct.deposit(amount);
+	}
+	
+	public void showBalanceAmt() {
+		//Keeing balance check
+		System.out.println("Balance of Account ID : " + getAcctNumber() + " " + balanceAmt);
+	}
+	
 	public void showInfo() {
+		//Account General Info
 		System.out.println("Name : " + name + "\n Account ID : " + acctNumber 
 				+"\n Account Type : " + acctType + "\n Balance : " + balanceAmt);
 
-		System.out.println(" " + acctType + " Interest Rate : " + rate);
+		System.out.println(" " + acctType + " Interest Rate : " + rate + "%");
 	}
 }
