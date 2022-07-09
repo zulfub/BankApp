@@ -1,22 +1,30 @@
 package backacctapp;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class backAcctApp {
 	public static void main(String[] args) {
-		
-		Checking acct1 = new Checking("Skuld","00000000099",2000);
-		Savings acct2 = new Savings("XIII","00000000001",1000);
-
-		acct1.showInfo();
-		acct1.compound();
-		System.out.println("****************");
-		acct2.showInfo();
-		acct2.compound();
-		System.out.println("****************");
-		acct1.deposit(1000);
-		acct2.withdraw(1000);
-		acct1.transfer(acct1, acct2, 1000);
+		List<Account> acctList = new LinkedList<Account>();
+		Account acct = null;
 		//Read CSV file
-		
+		String filePath = "..//BankApp//CSV/NewBankAccounts.csv";
+		List<String[]> newAccts = utilities.CSV.read(filePath);
 		//Create New Accounts based on data
+		for(String[] newAcctHolder : newAccts) {
+			String Acctname = newAcctHolder[0];
+			String TCKN = newAcctHolder[1];
+			String acctType = newAcctHolder[2];
+			double initialBalance=Double.parseDouble(newAcctHolder[3]);
+			if(acctType.equalsIgnoreCase("Checking")) {
+				
+				 acct = new Checking(Acctname,TCKN,initialBalance);
+			}
+			else if(acctType.equalsIgnoreCase("Savings")) {
+				 acct = new Savings(Acctname,TCKN,initialBalance);
+			}
+			acctList.add(acct);
+			acct.showInfo();
+		}
 	}
 }
